@@ -11,7 +11,7 @@ jobs:
       - id: step-1
         run: |
           {
-            echo "variable=|| echo ${{ secrets.TEST }}"
+            echo "variable=$(find . -type f -name 'output.txt' -printf "%p,")"
           } >> "$GITHUB_OUTPUT"
 
       - run: |
